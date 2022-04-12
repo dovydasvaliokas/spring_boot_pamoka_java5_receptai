@@ -8,5 +8,5 @@ import javax.persistence.Entity;
 
 @Repository
 public interface KategorijaRepository extends JpaRepository<Kategorija, Integer> {
-
+    Kategorija findById(int id);
 }

@@ -11,6 +11,8 @@ public interface ReceptasRepository  extends JpaRepository<Receptas, Long> {
 
     Receptas findByPavadinimas(String pavadinimas);
 
+    Receptas findById(long id);
+
     List<Receptas> findByKainaBetween(Double pradineKaina, Double galutineKaina);
 
 
