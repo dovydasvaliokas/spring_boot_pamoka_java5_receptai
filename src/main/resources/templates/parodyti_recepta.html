@@ -44,5 +44,10 @@
             <td th:text="${receptoKategorija.getPavadinimas()}"></td>
         </tr>
     </table>
+
+    <form th:action="@{'/recep/redaguoti_recepta/' + ${id}}" method="get">
+        <input type="submit" value="Redaguoti receptą">
+    </form>
+
 </body>
 </html>
