@@ -14,11 +14,11 @@
     <hr>
     <h2>Įveskite recepto duomenis</h2>
 
-    <form action="#" method="POST">
-        <input type="text"  placeholder="Recepto pavadinimas" class="form-control mb-4 col-4">
-        <input type="text"  placeholder="Recepto nurodymai" class="form-control mb-4 col-4">
-        <input type="number"  placeholder="Kalorijos 100g" class="form-control mb-4 col-4">
-        <input type="number"  placeholder="Kaina" class="form-control mb-4 col-4">
+    <form th:action="@{/recep/idejo_recepta}" th:object="${receptas}" method="POST">
+        <input th:field="*{pavadinimas}" type="text"  placeholder="Recepto pavadinimas" class="form-control mb-4 col-4">
+        <input th:field="*{nurodymai}" type="text"  placeholder="Recepto nurodymai" class="form-control mb-4 col-4">
+        <input th:field="*{kalorijosPer100g}" type="number"  placeholder="Kalorijos 100g" class="form-control mb-4 col-4">
+        <input th:field="*{kaina}" type="number"  placeholder="Kaina" class="form-control mb-4 col-4">
         <button type="submit" class="btn btn-info col-2">Išsaugokite receptą</button>
     </form>
 
