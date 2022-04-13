@@ -28,4 +28,9 @@ public class ReceptasController {
         receptasRepository.save(ivedamasReceptas);
         return "įdėjo";
     }
+
+    @GetMapping("/new")
+    String dawasdasd() {
+        return "ASfdadfadfadf";
+    }
 }

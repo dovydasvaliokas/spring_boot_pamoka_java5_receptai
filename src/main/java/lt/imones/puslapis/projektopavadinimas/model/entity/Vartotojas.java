@@ -2,19 +2,26 @@ package lt.imones.puslapis.projektopavadinimas.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Vartotojas {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String username;
-    String passsword;
+    String password;
+    private boolean enabled;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "vartotojo_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "receptoKurejas")
@@ -23,10 +30,12 @@ public class Vartotojas {
     public Vartotojas() {
     }
 
-    public Vartotojas(long id, String username, String passsword, Set<Receptas> vartotojoReceptai) {
+    public Vartotojas(long id, String username, String passsword, boolean enabled, Set<Role> roles, Set<Receptas> vartotojoReceptai) {
         this.id = id;
         this.username = username;
-        this.passsword = passsword;
+        this.password = passsword;
+        this.enabled = enabled;
+        this.roles = roles;
         this.vartotojoReceptai = vartotojoReceptai;
     }
 
@@ -46,12 +55,28 @@ public class Vartotojas {
         this.username = username;
     }
 
-    public String getPasssword() {
-        return passsword;
+    public String getPassword() {
+        return password;
     }
 
     public void setPasssword(String passsword) {
-        this.passsword = passsword;
+        this.password = passsword;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Set<Receptas> getVartotojoReceptai() {
@@ -67,7 +92,7 @@ public class Vartotojas {
         return "Vartotojas{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", passsword='" + passsword + '\'' +
+                ", passsword='" + password + '\'' +
                 ", vartotojoReceptai=" + vartotojoReceptai +
                 '}';
     }
