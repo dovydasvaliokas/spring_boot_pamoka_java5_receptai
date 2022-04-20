@@ -16,6 +16,7 @@
 
     <form th:action="@{/recep/idejo_recepta}" th:object="${receptas}" method="POST">
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{receptoKurejas.id}">
         <input th:field="*{pavadinimas}" type="text"  class="form-control mb-4 col-4">
         <input th:field="*{nurodymai}" type="text"  class="form-control mb-4 col-4">
         <input th:field="*{kalorijosPer100g}" type="number"  class="form-control mb-4 col-4">
