@@ -65,4 +65,10 @@ public class ReceptasMVController {
         model.addAttribute("kategorijos", kategorijaRepository.findAll());
         return "recepto_redagavimas.html";
     }
+
+    @PostMapping("/recep/istrinti_recepta/{id}")
+    String istrintiRecepta(Model model, @PathVariable long id) {
+        receptasRepository.delete(receptasRepository.findById(id));
+        return "istrintas_receptas.html";
+    }
 }

@@ -11,7 +11,7 @@ public class Kategorija {
     private String pavadinimas;
 
     @OneToMany(mappedBy = "receptoKategorija")
-    Set<Receptas> kategorijosReceptai;
+    private Set<Receptas> kategorijosReceptai;
 
     public Kategorija() {
     }

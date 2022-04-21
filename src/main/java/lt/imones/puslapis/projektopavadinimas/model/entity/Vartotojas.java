@@ -10,9 +10,9 @@ import java.util.Set;
 public class Vartotojas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String username;
-    String password;
+    private long id;
+    private String username;
+    private String password;
     private boolean enabled;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -25,18 +25,17 @@ public class Vartotojas {
 
     @JsonIgnore
     @OneToMany(mappedBy = "receptoKurejas")
-    Set<Receptas> vartotojoReceptai;
+    private Set<Receptas> vartotojoReceptai;
+
+    @ManyToMany
+    @JoinTable(
+            name = "vartotoju_megstami_receptai",
+            joinColumns = @JoinColumn(name = "vartotojo_id"),
+            inverseJoinColumns = @JoinColumn(name = "receptas_id")
+    )
+    private Set<Receptas> megstamiReceptai;
 
     public Vartotojas() {
-    }
-
-    public Vartotojas(long id, String username, String passsword, boolean enabled, Set<Role> roles, Set<Receptas> vartotojoReceptai) {
-        this.id = id;
-        this.username = username;
-        this.password = passsword;
-        this.enabled = enabled;
-        this.roles = roles;
-        this.vartotojoReceptai = vartotojoReceptai;
     }
 
     public long getId() {
@@ -81,6 +80,21 @@ public class Vartotojas {
 
     public Set<Receptas> getVartotojoReceptai() {
         return vartotojoReceptai;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public Set<Receptas> getMegstamiReceptai()
+    {
+        return megstamiReceptai;
+    }
+
+    public void setMegstamiReceptai(Set<Receptas> megstamiReceptai)
+    {
+        this.megstamiReceptai = megstamiReceptai;
     }
 
     public void setVartotojoReceptai(Set<Receptas> vartotojoReceptai) {
